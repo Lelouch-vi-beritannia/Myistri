@@ -304,37 +304,32 @@ body{font-family:'Outfit',sans-serif;color:var(--txt);display:flex;flex-directio
     <div class="ssec">
       <div class="stitle">🤖 AI Engine</div>
       <div class="scard">
-        <div class="srow" style="cursor:default"><div class="rico">✅</div><div class="rlbl">Status</div><div class="rv" style="color:var(--grn)">Aktif · Vercel Groq</div></div>
-        <div class="srow" style="cursor:default"><div class="rico">🚀</div><div class="rlbl">Platform</div><div class="rv">Vercel + Groq API</div></div>
+        <div class="srow" style="cursor:default"><div class="rico">✅</div><div class="rlbl">Status</div><div class="rv" id="api-status-txt" style="color:var(--grn)">Mengecek...</div></div>
+        <div class="srow" style="cursor:default"><div class="rico">🚀</div><div class="rlbl">Platform</div><div class="rv">Groq API (Gratis)</div></div>
+      </div>
+      <div style="margin-top:8px;padding:12px;background:var(--card);border:1.5px solid var(--acc);border-radius:10px">
+        <div style="font-size:12px;color:var(--acc);font-weight:700;margin-bottom:4px">🔑 Groq API Key (Wajib!)</div>
+        <div style="font-size:10px;color:var(--txt3);margin-bottom:8px;line-height:1.6">Gratis di <a href="https://console.groq.com" target="_blank" style="color:var(--acc)">console.groq.com</a> → klik "Create API Key"</div>
+        <div style="display:flex;gap:6px;margin-bottom:6px">
+          <input type="password" id="groq-key-input" placeholder="gsk_..." style="flex:1;padding:8px;background:var(--bg);border:1px solid var(--bdr);border-radius:6px;color:var(--txt);font-size:11px;font-family:monospace">
+          <button onclick="toggleGroqKeyVisibility()" id="groq-eye" style="padding:8px;background:var(--bg);border:1px solid var(--bdr);border-radius:6px;color:var(--txt2);cursor:pointer;font-size:14px">👁</button>
+        </div>
+        <div style="display:flex;gap:6px">
+          <button onclick="saveGroqKey()" style="flex:1;padding:8px;background:linear-gradient(135deg,#6d28d9,#a78bfa);color:#fff;border:none;border-radius:6px;font-size:12px;font-weight:700;cursor:pointer">✅ Simpan</button>
+          <button onclick="clearGroqKey()" style="flex:1;padding:8px;background:rgba(248,113,113,.1);color:var(--red);border:1px solid rgba(248,113,113,.3);border-radius:6px;font-size:12px;font-weight:700;cursor:pointer">🗑 Hapus</button>
+        </div>
+        <div id="groq-key-status" style="margin-top:6px;font-size:10px;color:var(--txt3);text-align:center"></div>
       </div>
       <div style="margin-top:8px;padding:10px;background:var(--card);border:1.5px solid var(--bdr);border-radius:10px">
-        <div style="font-size:11px;color:var(--txt2);margin-bottom:6px">🔗 Vercel API Endpoint</div>
-        <input type="text" id="vercel-url-input" placeholder="https://your-project.vercel.app/api/chat" style="width:100%;padding:8px;background:var(--bg);border:1px solid var(--bdr);border-radius:8px;color:var(--txt);font-size:11px;font-family:monospace;margin-bottom:6px">
+        <div style="font-size:11px;color:var(--txt2);font-weight:700;margin-bottom:6px">🔑 Mistral API Key (Opsional/Backup)</div>
+        <input type="password" id="mistral-key-input" placeholder="sk-..." style="width:100%;padding:6px;background:var(--bg);border:1px solid var(--bdr);border-radius:6px;color:var(--txt);font-size:11px;font-family:monospace;margin-bottom:6px">
         <div style="display:flex;gap:6px">
-          <button onclick="saveVercelUrl()" style="flex:1;padding:6px;background:linear-gradient(135deg,#6d28d9,#a78bfa);color:#fff;border:none;border-radius:6px;font-size:11px;font-weight:700;cursor:pointer">Simpan</button>
-          <button onclick="clearVercelUrl()" style="flex:1;padding:6px;background:rgba(248,113,113,.1);color:var(--red);border:1px solid rgba(248,113,113,.3);border-radius:6px;font-size:11px;font-weight:700;cursor:pointer">Hapus</button>
+          <button onclick="saveMistralKey()" style="flex:1;padding:6px;background:linear-gradient(135deg,#6d28d9,#a78bfa);color:#fff;border:none;border-radius:6px;font-size:11px;font-weight:700;cursor:pointer">Simpan</button>
+          <button onclick="clearMistralKey()" style="flex:1;padding:6px;background:rgba(248,113,113,.1);color:var(--red);border:1px solid rgba(248,113,113,.3);border-radius:6px;font-size:11px;font-weight:700;cursor:pointer">Hapus</button>
         </div>
       </div>
-      <div style="margin-top:8px;padding:10px;background:var(--card);border:1.5px solid var(--bdr);border-radius:10px">
-        <div style="font-size:11px;color:var(--txt2);margin-bottom:6px">🔑 Backup API Keys (opsional)</div>
-        
-        <div style="margin-bottom:8px">
-          <div style="font-size:10px;color:var(--txt3);margin-bottom:3px">Groq API Key</div>
-          <input type="password" id="groq-key-input" placeholder="gsk_..." style="width:100%;padding:6px;background:var(--bg);border:1px solid var(--bdr);border-radius:6px;color:var(--txt);font-size:11px;font-family:monospace">
-        </div>
-
-        <div style="margin-bottom:8px">
-          <div style="font-size:10px;color:var(--txt3);margin-bottom:3px">Mistral API Key</div>
-          <input type="password" id="mistral-key-input" placeholder="sk-..." style="width:100%;padding:6px;background:var(--bg);border:1px solid var(--bdr);border-radius:6px;color:var(--txt);font-size:11px;font-family:monospace">
-        </div>
-
-        <div style="display:flex;gap:6px">
-          <button onclick="saveBackupKeys()" style="flex:1;padding:6px;background:linear-gradient(135deg,#6d28d9,#a78bfa);color:#fff;border:none;border-radius:6px;font-size:11px;font-weight:700;cursor:pointer">Simpan</button>
-          <button onclick="clearBackupKeys()" style="flex:1;padding:6px;background:rgba(248,113,113,.1);color:var(--red);border:1px solid rgba(248,113,113,.3);border-radius:6px;font-size:11px;font-weight:700;cursor:pointer">Hapus</button>
-        </div>
-      </div>
-      <div style="margin-top:6px;padding:8px 12px;background:rgba(167,139,250,.07);border:1px solid rgba(167,139,250,.2);border-radius:10px;font-size:10px;color:var(--txt3);line-height:1.6">
-        💡 Pakai Vercel + Groq! Endpoint disini: https://waifuchat-api.vercel.app/api/chat
+      <div style="margin-top:6px;padding:8px 12px;background:rgba(52,211,153,.07);border:1px solid rgba(52,211,153,.2);border-radius:10px;font-size:10px;color:var(--grn);line-height:1.6">
+        💡 Groq gratis & cepat! Daftar di console.groq.com lalu buat API key baru.
       </div>
     </div>
     <div class="ssec">
@@ -1031,68 +1026,33 @@ async function callG(c,hist,wantsImg){
     return Promise.race([fetchProm,timeoutProm]);
   }
 
-  // 1. Vercel Groq API Proxy (PRIMARY)
+  // Panggil Netlify Function (API key ada di backend, aman!)
   try{
-    console.log('Trying Vercel Groq API...');
-    var vercelUrl=localStorage.getItem('vercel_api_url')||'https://waifuchat-api.vercel.app/api/chat';
-    var r=await fetchT(vercelUrl,{
-      method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({messages:[{role:'system',content:systemPrompt.slice(0,700)},{role:'user',content:userMsg}],max_tokens:150,temperature:0.7})
+    console.log('Calling Netlify function...');
+    var r=await fetchT('/.netlify/functions/chat',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        messages:[{role:'system',content:systemPrompt.slice(0,700)},{role:'user',content:userMsg}],
+        max_tokens:200,
+        temperature:0.8
+      })
     },20000);
     if(r.ok){
       var d=await r.json();
       var t=d&&d.choices&&d.choices[0]&&d.choices[0].message&&d.choices[0].message.content;
       if(t&&typeof t==='string'&&t.trim().length>0){
-        console.log('✅ Got response from Vercel Groq API');
+        console.log('✅ Got response!');
         return t.trim();
       }
     }else{
-      var err=await r.text();
-      console.warn('Vercel error:',r.status,err);
+      var errTxt=await r.text();
+      console.warn('Function error:',r.status,errTxt);
+      throw new Error('Server error: '+r.status);
     }
-  }catch(e){console.warn('Vercel API:',e.message);}
-
-  // 2. Direct Groq API (backup - jika ada key)
-  var groqKey=localStorage.getItem('groq_api_key');
-  if(groqKey){
-    try{
-      console.log('Trying Direct Groq API...');
-      var r2=await fetchT('https://api.groq.com/openai/v1/chat/completions',{
-        method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+groqKey},
-        body:JSON.stringify({model:'mixtral-8x7b-32768',messages:[{role:'system',content:systemPrompt.slice(0,700)},{role:'user',content:userMsg}],max_tokens:150})
-      },20000);
-      if(r2.ok){
-        var d2=await r2.json();
-        var t2=d2&&d2.choices&&d2.choices[0]&&d2.choices[0].message&&d2.choices[0].message.content;
-        if(t2&&typeof t2==='string'&&t2.trim().length>0){
-          console.log('✅ Got response from Direct Groq');
-          return t2.trim();
-        }
-      }
-    }catch(e){console.warn('Direct Groq:',e.message);}
-  }
-
-  // 3. Mistral API (backup - jika ada key)
-  var mistralKey=localStorage.getItem('mistral_api_key');
-  if(mistralKey){
-    try{
-      console.log('Trying Mistral API...');
-      var r3=await fetchT('https://api.mistral.ai/v1/chat/completions',{
-        method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+mistralKey},
-        body:JSON.stringify({model:'mistral-small',messages:[{role:'system',content:systemPrompt.slice(0,700)},{role:'user',content:userMsg}],max_tokens:150})
-      },20000);
-      if(r3.ok){
-        var d3=await r3.json();
-        var t3=d3&&d3.choices&&d3.choices[0]&&d3.choices[0].message&&d3.choices[0].message.content;
-        if(t3&&typeof t3==='string'&&t3.trim().length>0){
-          console.log('✅ Got response from Mistral');
-          return t3.trim();
-        }
-      }
-    }catch(e){console.warn('Mistral:',e.message);}
-  }
-
-  throw new Error('Semua provider gagal. Setup Vercel endpoint di settings!');
+  }catch(e){
+    console.warn('Netlify function gagal:',e.message);
+    throw new Error('Gagal konek ke AI. Coba refresh halaman!');\n  }
 }
 async function callGWithImage(c,hist,imageData){
   var prompt=bldP(c,false)+'\n\nPengguna mengirimkan sebuah foto. Responlah sesuai karakter seolah kamu melihat foto tersebut.';
@@ -1210,48 +1170,57 @@ function saveChar(){
   var cu=getCusts();cu.unshift(c);usk('wcc',cu);
   toast('✨ Karakter '+nm+' berhasil dibuat!');goBack();
 }
-function saveVercelUrl(){
-  var url=document.getElementById('vercel-url-input').value.trim();
-  if(!url){toast('⚠️ URL kosong');return;}
-  if(!url.includes('vercel.app')||!url.includes('/api/chat')){toast('⚠️ Format: https://your-project.vercel.app/api/chat');return;}
-  localStorage.setItem('vercel_api_url',url);
-  toast('✅ Vercel endpoint tersimpan!');
-  document.getElementById('vercel-url-input').value='';
-}
-function clearVercelUrl(){
-  if(!confirm('Hapus Vercel endpoint?'))return;
-  localStorage.removeItem('vercel_api_url');
-  document.getElementById('vercel-url-input').value='';
-  toast('🗑 Vercel endpoint dihapus');
-}
-function saveBackupKeys(){
-  var groq=document.getElementById('groq-key-input').value.trim();
-  var mistral=document.getElementById('mistral-key-input').value.trim();
-  if(groq){
-    if(!groq.startsWith('gsk_')){toast('⚠️ Groq key harus dimulai dengan gsk_');return;}
-    localStorage.setItem('groq_api_key',groq);
-  }
-  if(mistral){
-    if(!mistral.startsWith('sk-')){toast('⚠️ Mistral key harus dimulai dengan sk-');return;}
-    localStorage.setItem('mistral_api_key',mistral);
-  }
-  if(!groq&&!mistral){toast('⚠️ Input minimal satu API key');return;}
-  toast('✅ Backup API keys tersimpan!');
+function saveGroqKey(){
+  var k=document.getElementById('groq-key-input').value.trim();
+  if(!k){toast('⚠️ Masukkan API key dulu!');return;}
+  if(!k.startsWith('gsk_')){toast('⚠️ Groq key harus dimulai gsk_');return;}
+  localStorage.setItem('groq_api_key',k);
   document.getElementById('groq-key-input').value='';
-  document.getElementById('mistral-key-input').value='';
+  document.getElementById('groq-key-status').textContent='✅ API key tersimpan!';
+  document.getElementById('groq-key-status').style.color='var(--grn)';
+  document.getElementById('api-status-txt').textContent='Aktif · Groq API';
+  toast('✅ Groq API key tersimpan! Sekarang bisa chat 🎉');
 }
-function clearBackupKeys(){
-  if(!confirm('Hapus semua backup API keys?'))return;
+function clearGroqKey(){
+  if(!confirm('Hapus Groq API key?'))return;
   localStorage.removeItem('groq_api_key');
-  localStorage.removeItem('mistral_api_key');
-  document.getElementById('groq-key-input').value='';
-  document.getElementById('mistral-key-input').value='';
-  toast('🗑 Backup API keys dihapus');
+  document.getElementById('groq-key-status').textContent='⚠️ API key belum diset';
+  document.getElementById('groq-key-status').style.color='var(--red)';
+  toast('🗑 Groq API key dihapus');
 }
+function toggleGroqKeyVisibility(){
+  var inp=document.getElementById('groq-key-input');
+  inp.type=inp.type==='password'?'text':'password';
+}
+function saveMistralKey(){
+  var k=document.getElementById('mistral-key-input').value.trim();
+  if(!k||!k.startsWith('sk-')){toast('⚠️ Mistral key harus dimulai sk-');return;}
+  localStorage.setItem('mistral_api_key',k);
+  document.getElementById('mistral-key-input').value='';
+  toast('✅ Mistral API key tersimpan!');
+}
+function clearMistralKey(){
+  if(!confirm('Hapus Mistral API key?'))return;
+  localStorage.removeItem('mistral_api_key');
+  toast('🗑 Mistral API key dihapus');
+}
+function saveVercelUrl(){toast('ℹ️ Vercel tidak diperlukan lagi, pakai Groq langsung!');}
+function clearVercelUrl(){localStorage.removeItem('vercel_api_url');toast('🗑 Vercel endpoint dihapus');}
+function saveBackupKeys(){saveGroqKey();}
+function clearBackupKeys(){clearGroqKey();clearMistralKey();}
+}
+
 function rSet(){
   var cs=getAll();var tm=cs.reduce(function(a,c){return a+getH(c.id).length;},0);
   document.getElementById('stc').textContent=cs.length+' ('+getCusts().length+' custom)';
   document.getElementById('stm').textContent=tm+' pesan';
+  var hasKey=!!localStorage.getItem('groq_api_key');
+  var statusEl=document.getElementById('api-status-txt');
+  var keyStatusEl=document.getElementById('groq-key-status');
+  if(statusEl)statusEl.textContent=hasKey?'Aktif · Groq API':'⚠️ API key belum diset';
+  if(statusEl)statusEl.style.color=hasKey?'var(--grn)':'var(--red)';
+  if(keyStatusEl)keyStatusEl.textContent=hasKey?'✅ API key sudah tersimpan':'⚠️ Belum ada API key';
+  if(keyStatusEl)keyStatusEl.style.color=hasKey?'var(--grn)':'var(--red)';
 }
 function clearAllChats(){if(!confirm('Hapus SEMUA riwayat chat?'))return;getAll().forEach(function(c){delH(c.id);});toast('🗑 Semua chat dihapus');rSet();}
 function clearCustom(){if(!confirm('Hapus semua karakter custom?'))return;localStorage.removeItem('wcc');toast('❌ Karakter custom dihapus');rSet();}
