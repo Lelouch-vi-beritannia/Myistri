@@ -1052,7 +1052,8 @@ async function callG(c,hist,wantsImg){
     }
   }catch(e){
     console.warn('Netlify function gagal:',e.message);
-    throw new Error('Gagal konek ke AI. Coba refresh halaman!');\n  }
+    throw new Error('Gagal konek ke AI. Coba refresh halaman!');
+  }
 }
 async function callGWithImage(c,hist,imageData){
   var prompt=bldP(c,false)+'\n\nPengguna mengirimkan sebuah foto. Responlah sesuai karakter seolah kamu melihat foto tersebut.';
@@ -1208,7 +1209,6 @@ function saveVercelUrl(){toast('ℹ️ Vercel tidak diperlukan lagi, pakai Groq 
 function clearVercelUrl(){localStorage.removeItem('vercel_api_url');toast('🗑 Vercel endpoint dihapus');}
 function saveBackupKeys(){saveGroqKey();}
 function clearBackupKeys(){clearGroqKey();clearMistralKey();}
-}
 
 function rSet(){
   var cs=getAll();var tm=cs.reduce(function(a,c){return a+getH(c.id).length;},0);
