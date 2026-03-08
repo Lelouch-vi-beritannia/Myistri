@@ -1,9 +1,7 @@
-// Netlify Function format
-const GROQ_API_KEY = 'gsk_APIKEY_BARU_KAMU_DISINI'; // Ganti dengan key baru!
+const GROQ_API_KEY = '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';
 const GROQ_API_URL = 'https://api.groq.com/openai/v1/chat/completions';
 
 exports.handler = async (event, context) => {
-  // Enable CORS
   const headers = {
     'Access-Control-Allow-Credentials': 'true',
     'Access-Control-Allow-Origin': '*',
@@ -20,7 +18,7 @@ exports.handler = async (event, context) => {
   }
 
   try {
-    const { messages, max_tokens = 150, temperature = 0.7 } = JSON.parse(event.body);
+    const { messages, max_tokens = 200, temperature = 0.8 } = JSON.parse(event.body);
 
     if (!messages || !Array.isArray(messages)) {
       return { statusCode: 400, headers, body: JSON.stringify({ error: 'messages array required' }) };
@@ -33,7 +31,7 @@ exports.handler = async (event, context) => {
         'Authorization': `Bearer ${GROQ_API_KEY}`
       },
       body: JSON.stringify({
-        model: 'mixtral-8x7b-32768',
+        model: 'llama3-8b-8192',
         messages,
         max_tokens: Math.min(max_tokens, 500),
         temperature
@@ -42,7 +40,11 @@ exports.handler = async (event, context) => {
 
     if (!groqResponse.ok) {
       const errorData = await groqResponse.text();
-      return { statusCode: groqResponse.status, headers, body: JSON.stringify({ error: `Groq API error: ${groqResponse.status}`, details: errorData }) };
+      return {
+        statusCode: groqResponse.status,
+        headers,
+        body: JSON.stringify({ error: `Groq API error: ${groqResponse.status}`, details: errorData })
+      };
     }
 
     const completion = await groqResponse.json();
@@ -61,6 +63,10 @@ exports.handler = async (event, context) => {
     };
 
   } catch (error) {
-    return { statusCode: 500, headers, body: JSON.stringify({ error: error.message || 'Internal server error' }) };
+    return {
+      statusCode: 500,
+      headers,
+      body: JSON.stringify({ error: error.message || 'Internal server error' })
+    };
   }
 };
